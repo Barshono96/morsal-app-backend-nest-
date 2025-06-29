@@ -1,5 +1,5 @@
 <<<<<<< HEAD
- morsal-app-backend-nest-
+ 🛠️ Morsl Admin Dashboard –
 A nest api
 =======
 <p align="center">
@@ -26,7 +26,7 @@ A nest api
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 
-# 🛠️ Morsl Admin Dashboard – Backend
+# 
 
 This is the backend API for the **Morsl App Admin Dashboard**, supporting content and feedback management for a minimalist, offline-first mobile app designed to help users identify food cravings via intuitive swipe interactions.
 
