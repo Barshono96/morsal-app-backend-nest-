@@ -11,12 +11,12 @@ import { upload } from '../config/multer.config';
 import { Category } from '@prisma/client';
 
 @Controller('food')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles('ADMIN')
 export class FoodController {
     constructor(private readonly foodService: FoodService) { }
 
     @Post('createCollection')
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @Roles('ADMIN')
     @UseInterceptors(FileInterceptor('image', upload))
     async create(@Body() createFoodDto: CreateFoodDto, @UploadedFile() file: Express.Multer.File) {
         createFoodDto.image = file.filename;
@@ -24,15 +24,11 @@ export class FoodController {
     }
 
     @Get('getCollection')
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @Roles('ADMIN')
     async getCollection(@Query('page') page = 1, @Query('limit') limit = 10, @Query('category') category: Category) {
         return this.foodService.getAllFoodItems(Number(page), Number(limit), category);
     }
 
     @Put('updateCollection/:id')
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @Roles('ADMIN')
     @UseInterceptors(FileInterceptor('image', upload))
     async update(@Param('id') id: string, @Body() updateFoodDto: UpdateFoodDto, @UploadedFile() file: Express.Multer.File) {
         if (file) updateFoodDto.image = file.filename;
@@ -40,8 +36,6 @@ export class FoodController {
     }
 
     @Delete('deleteCollection/:id')
-    @UseGuards(JwtAuthGuard, RolesGuard)
-    @Roles('ADMIN')
     async delete(@Param('id') id: string) {
         return this.foodService.deleteFood(id);
     }
